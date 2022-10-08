@@ -13,9 +13,9 @@ public class Partyroom implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String name;
     private String owner;
     private Integer capacity;
-    private String name;
     private String description;
 
     @ManyToOne
@@ -24,11 +24,11 @@ public class Partyroom implements Serializable {
     private Category category;
 
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "partyroom")
-    @JsonIgnoreProperties("partyroom")
+    @JsonIgnoreProperties({"partyroom","client"})
     private List<Message> messages;
 
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "partyroom")
-    @JsonIgnoreProperties("partyroom")
+    @JsonIgnoreProperties({"partyroom","messages"})
     private List<Reservation> reservations;
 
     public Integer getId() {
