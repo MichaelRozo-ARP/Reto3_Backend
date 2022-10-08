@@ -23,8 +23,8 @@ public class Category implements Serializable {
         return id;
     }
 
-    public void setId(Integer idCategory) {
-        this.id = idCategory;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
