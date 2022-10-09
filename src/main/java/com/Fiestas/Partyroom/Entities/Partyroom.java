@@ -1,6 +1,6 @@
 package com.Fiestas.Partyroom.Entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,7 +20,7 @@ public class Partyroom implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "categoryId")
-    @JsonIgnoreProperties("Partyrooms")
+    @JsonIgnoreProperties({"partyroom","partyrooms"})
     private Category category;
 
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "partyroom")
@@ -71,6 +71,7 @@ public class Partyroom implements Serializable {
         this.description = description;
     }
 
+    //@JsonBackReference
     public Category getCategory() {
         return category;
     }
