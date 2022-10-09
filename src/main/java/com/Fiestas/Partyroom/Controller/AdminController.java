@@ -12,10 +12,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/Admin")
 public class AdminController {
-
     @Autowired
     private AdminService adminService;
-
     @GetMapping("/all")
     public List<Admin> getAll(){
         return adminService.getAll();
@@ -29,4 +27,10 @@ public class AdminController {
     public Admin save(@RequestBody  Admin admin){
         return adminService.save(admin);
     }
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Admin update(@RequestBody Admin admin){ return adminService.update(admin);}
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable("id") Integer id){ return adminService.delete(id);}
 }

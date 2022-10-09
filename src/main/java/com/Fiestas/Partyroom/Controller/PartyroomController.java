@@ -12,15 +12,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/Partyroom")
 public class PartyroomController {
-
     @Autowired
     private PartyroomService partyroomService;
-
     @GetMapping("/all")
     public List<Partyroom> getAll(){
         return partyroomService.getAll();
     }
-
     @GetMapping("/{id}")
     public Optional<Partyroom> getPartyroom(@PathVariable("id") Integer id){
         return partyroomService.getPartyroom(id);
@@ -30,4 +27,10 @@ public class PartyroomController {
     public Partyroom save(@RequestBody Partyroom partyroom){
         return partyroomService.save(partyroom);
     }
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Partyroom update(@RequestBody Partyroom partyroom){ return partyroomService.update(partyroom);}
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable("id") Integer id){ return partyroomService.delete(id);}
 }

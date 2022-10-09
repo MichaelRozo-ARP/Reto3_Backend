@@ -10,10 +10,8 @@ import java.util.Optional;
 
 @Service
 public class ReservationService {
-
     @Autowired
     private ReservationRepository reservationRepository;
-
     public List<Reservation> getAll(){
         return reservationRepository.getAll();
     }
@@ -32,14 +30,10 @@ public class ReservationService {
             }
         }
     }
-
     public Reservation update(Reservation reservation){
         if(reservation.getIdReservation()!=null){
             Optional<Reservation> q = reservationRepository.getReservation(reservation.getIdReservation());
             if(q.isPresent()){
-                if(reservation.getIdReservation()!=null){
-                    q.get().setIdReservation(reservation.getIdReservation());
-                }
                 if(reservation.getStartDate()!=null){
                     q.get().setStartDate(reservation.getStartDate());
                 }
@@ -48,15 +42,6 @@ public class ReservationService {
                 }
                 if(reservation.getStatus()!=null){
                     q.get().setStatus(reservation.getStatus());
-                }
-                if(reservation.getPartyroom()!=null){
-                    q.get().setPartyroom(reservation.getPartyroom());
-                }
-                if(reservation.getClient()!=null){
-                    q.get().setClient(reservation.getClient());
-                }
-                if(reservation.getScore()!=null){
-                    q.get().setScore(reservation.getScore());
                 }
                 reservationRepository.save(q.get());
                 return q.get();
@@ -67,7 +52,6 @@ public class ReservationService {
             return reservation;
         }
     }
-
     public boolean delete(Integer id){
         boolean flag=false;
         Optional<Reservation> reservation= reservationRepository.getReservation(id);
@@ -76,6 +60,5 @@ public class ReservationService {
             flag=true;
         }
         return flag;
-
     }
 }

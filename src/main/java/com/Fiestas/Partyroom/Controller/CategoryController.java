@@ -12,10 +12,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/Category")
 public class CategoryController {
-
     @Autowired
     private CategoryService categoryService;
-
     @GetMapping("/all")
     public List<Category> getAll(){
         return categoryService.getAll();
@@ -29,5 +27,11 @@ public class CategoryController {
     public Category save(@RequestBody  Category category){
         return categoryService.save(category);
     }
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Category update(@RequestBody Category category){ return categoryService.update(category);}
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable("id") Integer id){ return categoryService.delete(id);}
 
 }

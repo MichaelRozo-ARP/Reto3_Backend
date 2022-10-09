@@ -1,6 +1,5 @@
 package com.Fiestas.Partyroom.Repository;
 
-import com.Fiestas.Partyroom.Entities.Message;
 import com.Fiestas.Partyroom.Entities.Reservation;
 import com.Fiestas.Partyroom.Repository.CrudRepository.ReservationCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;

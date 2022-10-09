@@ -10,18 +10,14 @@ import java.util.Optional;
 
 @Service
 public class CategoryService {
-
     @Autowired
     private CategoryRepository categoryRepository;
-
     public List<Category> getAll(){
         return categoryRepository.getAll();
     }
-
     public Optional<Category> getCategory(Integer id){
         return categoryRepository.getCategory(id);
     }
-
     public Category save(Category category){
         if(category.getId()==null){
             return categoryRepository.save(category);
@@ -34,7 +30,6 @@ public class CategoryService {
             }
         }
     }
-
     public Category update(Category category){
         if(category.getId()!=null){
             Optional<Category> q = categoryRepository.getCategory(category.getId());
@@ -45,9 +40,6 @@ public class CategoryService {
                 if (category.getDescription() !=null){
                     q.get().setDescription(category.getDescription());
                 }
-                if (category.getPartyrooms() !=null){
-                    q.get().setPartyrooms(category.getPartyrooms());
-                }
                 categoryRepository.save(q.get());
                 return q.get();
             }else{
@@ -57,7 +49,6 @@ public class CategoryService {
             return category;
         }
     }
-
     public boolean delete(Integer id){
         boolean flag=false;
         Optional<Category> category= categoryRepository.getCategory(id);

@@ -12,15 +12,12 @@ import java.util.Optional;
 public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
-
     public List<Client> getAll(){
         return clientRepository.getAll();
     }
-
-    public Optional<Client> getProduct(Integer id){
+    public Optional<Client> getClient(Integer id){
         return clientRepository.getClient(id);
     }
-
     public Client save(Client client){
         if(client.getIdClient()==null){
             return clientRepository.save(client);
@@ -34,7 +31,6 @@ public class ClientService {
             }
         }
     }
-
     public Client update(Client client){
         if(client.getIdClient()!=null){
             Optional<Client> q = clientRepository.getClient(client.getIdClient());
@@ -51,12 +47,6 @@ public class ClientService {
                 if(client.getAge()!=null){
                     q.get().setAge(client.getAge());
                 }
-                if(client.getMessages()!=null){
-                    q.get().setMessages(client.getMessages());
-                }
-                if(client.getReservations()!=null){
-                    q.get().setReservations(client.getReservations());
-                }
                 clientRepository.save(q.get());
                 return q.get();
             }else{
@@ -66,9 +56,13 @@ public class ClientService {
             return client;
         }
     }
-
-
-
-
-
+    public boolean delete(Integer id){
+        boolean flag=false;
+        Optional<Client> client= clientRepository.getClient(id);
+        if(client.isPresent()){
+            clientRepository.delete(client.get());
+            flag=true;
+        }
+        return flag;
+    }
 }

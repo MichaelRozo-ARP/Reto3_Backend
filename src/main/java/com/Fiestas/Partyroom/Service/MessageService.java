@@ -10,18 +10,14 @@ import java.util.Optional;
 
 @Service
 public class MessageService {
-
     @Autowired
     private MessageRepository messageRepository;
-
     public List<Message> getAll(){
         return messageRepository.getAll();
     }
-
     public Optional<Message> getMessage(Integer id){
         return messageRepository.getMessage(id);
     }
-
     public Message save(Message message){
         if(message.getIdMessage()==null){
             return messageRepository.save(message);
@@ -34,19 +30,12 @@ public class MessageService {
             }
         }
     }
-
     public Message update(Message message){
         if(message.getIdMessage()!=null){
             Optional<Message> q = messageRepository.getMessage(message.getIdMessage());
             if(q.isPresent()){
                 if(message.getMessageText()!=null){
                     q.get().setMessageText(message.getMessageText());
-                }
-                if(message.getPartyroom()!=null){
-                    q.get().setPartyroom(message.getPartyroom());
-                }
-                if(message.getClient()!=null){
-                    q.get().setClient(message.getClient());
                 }
                 messageRepository.save(q.get());
                 return q.get();
@@ -57,7 +46,6 @@ public class MessageService {
             return message;
         }
     }
-
     public boolean delete(Integer id){
         boolean flag=false;
         Optional<Message> message= messageRepository.getMessage(id);

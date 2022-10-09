@@ -10,14 +10,11 @@ import java.util.Optional;
 
 @Service
 public class PartyroomService {
-
     @Autowired
     private PartyroomRepository partyroomRepository;
-
     public List<Partyroom> getAll(){
         return partyroomRepository.getAll();
     }
-
     public Optional<Partyroom> getPartyroom(Integer id){
         return partyroomRepository.getPartyroom(id);
     }
@@ -33,7 +30,6 @@ public class PartyroomService {
             }
         }
     }
-
     public Partyroom update(Partyroom partyroom){
         if(partyroom.getId()!=null){
             Optional<Partyroom> q = partyroomRepository.getPartyroom(partyroom.getId());
@@ -53,12 +49,6 @@ public class PartyroomService {
                 if(partyroom.getCapacity()!=null){
                     q.get().setCapacity(partyroom.getCapacity());
                 }
-                if(partyroom.getMessages()!=null){
-                    q.get().setMessages(partyroom.getMessages());
-                }
-                if(partyroom.getReservations()!=null){
-                    q.get().setReservations(partyroom.getReservations());
-                }
                 partyroomRepository.save(q.get());
                 return q.get();
             }else{
@@ -68,7 +58,6 @@ public class PartyroomService {
             return partyroom;
         }
     }
-
     public boolean delete(Integer id){
         boolean flag=false;
         Optional<Partyroom> partyroom= partyroomRepository.getPartyroom(id);

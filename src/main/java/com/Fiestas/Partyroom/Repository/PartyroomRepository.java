@@ -22,9 +22,7 @@ public class PartyroomRepository {
         return partyroomCrudRepository.findById(id);
     }
 
-    public Partyroom save(Partyroom partyroom){
-        return partyroomCrudRepository.save(partyroom);
-    }
+    public Partyroom save(Partyroom partyroom){ return partyroomCrudRepository.save(partyroom);}
 
     public void delete(Partyroom partyroom){
         partyroomCrudRepository.delete(partyroom);

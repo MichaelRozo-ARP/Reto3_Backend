@@ -1,8 +1,6 @@
 package com.Fiestas.Partyroom.Repository;
 
-import com.Fiestas.Partyroom.Entities.Category;
 import com.Fiestas.Partyroom.Entities.Client;
-import com.Fiestas.Partyroom.Repository.CrudRepository.CategoryCrudRepository;
 import com.Fiestas.Partyroom.Repository.CrudRepository.ClientCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

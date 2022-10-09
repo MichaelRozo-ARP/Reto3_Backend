@@ -12,10 +12,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/Score")
 public class ScoreController {
-
     @Autowired
     private ScoreService scoreService;
-
     @GetMapping("/all")
     public List<Score> getAll(){
         return scoreService.getAll();
@@ -29,4 +27,10 @@ public class ScoreController {
     public Score save(@RequestBody  Score score){
         return scoreService.save(score);
     }
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Score update(@RequestBody Score score){ return scoreService.update(score);}
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable("id") Integer id){ return scoreService.delete(id);}
 }
