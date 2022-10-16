@@ -5,6 +5,7 @@ import com.Fiestas.Partyroom.Repository.CrudRepository.ReservationCrudRepository
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,5 +29,16 @@ public class ReservationRepository {
 
     public void delete(Reservation reservation){
         reservationCrudRepository.delete(reservation);
+    }
+
+    public List<Reservation> getDatesReport(Date inicio, Date fin){
+        return reservationCrudRepository.findAllByStartDateAfterAndStartDateBefore(inicio,fin);
+    }
+    public List<Reservation> getStatusReport(String sts){
+        return reservationCrudRepository.findAllByStatus(sts);
+    }
+
+    public List<Object[]> getTopClients(){
+        return reservationCrudRepository.getTopClients();
     }
 }

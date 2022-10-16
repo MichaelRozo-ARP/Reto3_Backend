@@ -1,6 +1,8 @@
 package com.Fiestas.Partyroom.Controller;
 
 import com.Fiestas.Partyroom.Entities.Reservation;
+import com.Fiestas.Partyroom.Entities.dto.StatusCount;
+import com.Fiestas.Partyroom.Entities.dto.TopClients;
 import com.Fiestas.Partyroom.Service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,4 +35,16 @@ public class ReservationController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") Integer id){ return reservationService.delete(id);}
+    @GetMapping("/report-dates/{dateA}/{dateB}")
+    public List<Reservation> getByDates(@PathVariable("dateA")String da,@PathVariable("dateB")String db ){
+        return reservationService.getReservationsByPeriod(da,db);
+    }
+    @GetMapping("/report-status")
+    public StatusCount getByStatus(){
+        return reservationService.getReportByStatus();
+    }
+    @GetMapping("/report-clients")
+    public List<TopClients> getTopClients(){
+        return reservationService.getTopclients();
+    }
 }

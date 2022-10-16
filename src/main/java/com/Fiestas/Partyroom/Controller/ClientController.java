@@ -1,5 +1,6 @@
 package com.Fiestas.Partyroom.Controller;
 
+import com.Fiestas.Partyroom.Entities.Category;
 import com.Fiestas.Partyroom.Entities.Client;
 import com.Fiestas.Partyroom.Service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/Client")
 public class ClientController {
@@ -15,6 +18,10 @@ public class ClientController {
     @GetMapping("/all")
     public List<Client> getAll(){
         return clientService.getAll();
+    }
+    @GetMapping("/{id}")
+    public Optional<Client> getClient(@PathVariable("id") Integer id){
+        return clientService.getClient(id);
     }
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)

@@ -1,10 +1,17 @@
 package com.Fiestas.Partyroom.Service;
 
+import com.Fiestas.Partyroom.Entities.Client;
 import com.Fiestas.Partyroom.Entities.Reservation;
+import com.Fiestas.Partyroom.Entities.dto.StatusCount;
+import com.Fiestas.Partyroom.Entities.dto.TopClients;
 import com.Fiestas.Partyroom.Repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,4 +68,43 @@ public class ReservationService {
         }
         return flag;
     }
+
+    public List<Reservation> getReservationsByPeriod(String dateA,String dateB){
+
+        SimpleDateFormat parser=new SimpleDateFormat("yyyy-MM-dd");
+        Date a= new Date();
+        Date b=new Date();
+        try {
+            a=parser.parse(dateA);
+            b=parser.parse(dateB);
+        }catch (ParseException e){
+            e.printStackTrace();;
+        }
+        if(a.before(b)){
+            return reservationRepository.getDatesReport(a,b);
+        }else{
+            return new ArrayList<Reservation>();
+        }
+    }
+    public StatusCount getReportByStatus(){
+        List<Reservation> completes=reservationRepository.getStatusReport("completed");
+        List<Reservation> cancelled=reservationRepository.getStatusReport("cancelled");
+
+        StatusCount resultado=new StatusCount(completes.size(),cancelled.size());
+        return resultado;
+
+    }
+    public List<TopClients> getTopclients(){
+        List<TopClients> tc=new ArrayList<>();
+        List<Object[]> result= reservationRepository.getTopClients();
+
+        for(int i=0;i<result.size();i++){
+            int total=Integer.parseInt(result.get(i)[1].toString());
+            Client client= (Client) result.get(i)[0];
+            TopClients topClient=new TopClients(total,client);
+            tc.add(topClient);
+        }
+        return tc;
+    }
+
 }
